@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    //Criando um estado de objeto configurando com a chamada de dados da api.
+    @StateObject var viewModel = HomeViewModel()
+        
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            ScrollView(.vertical, showsIndicators: false) {
+            
+                TopMoversView()
+               
+                Divider()
+                
+                AllCoinsView(viewModel: viewModel)
+            }
+            .navigationTitle("Live Prices")
+        }
     }
 }
 
