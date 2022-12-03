@@ -41,8 +41,8 @@ struct AllCoinsView: View {
     }
 }
 
-//struct AllCoinsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AllCoinsView()
-//    }
-//}
+struct AllCoinsView_Previews: PreviewProvider {
+    static var previews: some View {
+        AllCoinsView()
+    }
+}

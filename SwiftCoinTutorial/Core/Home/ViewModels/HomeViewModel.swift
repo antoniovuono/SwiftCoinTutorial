@@ -10,6 +10,7 @@ import SwiftUI
 //Esse view model vai ser responsável por se comunicar com a API.
 class HomeViewModel: ObservableObject {
     @Published var coins = [Coin]()
+    @Published var topMovingCoins = [Coin]()
     //Initializer vai toda vez que essa classe for chamada vai fazer renderizar a função de fetchCoinData
     init() {
         fetchCoinData()
@@ -37,12 +38,21 @@ class HomeViewModel: ObservableObject {
             
             do {
                 let coins = try JSONDecoder().decode([Coin].self, from: data)
-                self.coins = coins
+                DispatchQueue.main.async {
+                    self.coins = coins
+                    self.configureTopMoverMovingCoins()
+                }
             } catch let error {
                 print("DEBUG: Failed to decode with error: \(error)")
             }
 
             }.resume()
+        }
+    
+    //Configurar a listagem de moedas que mais valorizaram.
+    func configureTopMoverMovingCoins() {
+        let topMovers = coins.sorted(by: { $0.priceChangePercentage24H > $1.priceChangePercentage24H })
+        self.topMovingCoins = Array(topMovers.prefix(5))
         }
     }
 

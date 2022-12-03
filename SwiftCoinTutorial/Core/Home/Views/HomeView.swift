@@ -16,7 +16,7 @@ struct HomeView: View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
             
-                TopMoversView()
+                TopMoversView(viewModel: viewModel)
                
                 Divider()
                 
